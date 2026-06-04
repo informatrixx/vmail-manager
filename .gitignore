@@ -1,0 +1,9 @@
+config.php
+data/
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+*.conf.part
+postfix-sql-cf.txt
+AGENTS.md
