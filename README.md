@@ -125,16 +125,16 @@ Only enable this when the PHP-FPM user has the required permissions and the path
 For an application mounted below `/vmail-manager/` in an existing Nginx `server` block:
 
 ```nginx
-location ^~ /vmail-manager/ {
-    alias /var/www/vmail-manager/;
+location /vmail-manager/ {
+    root /var/www;
     index index.php;
     try_files $uri $uri/ /vmail-manager/index.php?$query_string;
 }
 
 location ~ ^/vmail-manager/(.+\.php)$ {
-    alias /var/www/vmail-manager/$1;
-    include snippets/fastcgi-php.conf;
+    include fastcgi_params;
     fastcgi_param SCRIPT_FILENAME /var/www/vmail-manager/$1;
+    fastcgi_param DOCUMENT_ROOT /var/www/vmail-manager;
     fastcgi_pass unix:/run/php/php8.4-fpm.sock;
 }
 
